@@ -6,7 +6,7 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom";
 
 // Navigeerimiseks (Route-miseks)
-// 1. npm install react-router-dom
+// 1. npm install react-router-dom <--- lisatakse node_modules kausta route-miseks vajalik kood
 // 2. import BrowserRouter
 // 3. BrowserRouter tag panna <App/> ümber
 // 4. App.js failis tekitada URL ja HTML seosed
