@@ -1,6 +1,5 @@
 // rfce
-
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 function Avaleht() {
   // let kogus = 8;
@@ -39,10 +38,10 @@ function Avaleht() {
       <button onClick={() => uuendaLaigitud(!laigitud)}>Muuda like</button>
       <br /><br />
 
-      <div>{sonum}</div>
+      <div className={kogus > 10 ? "kuldne" : undefined}>{sonum}</div>
       { kogus !== 0 && <button onClick={nulli}>Nulli</button>}
       <button disabled={kogus === 0} onClick={vahenda}>-</button>
-      <span>{kogus}</span>
+      <span className={kogus > 10 ? "kuldne" : undefined}>{kogus}</span>
       <button onClick={suurenda}>+</button>
     </div>
   )

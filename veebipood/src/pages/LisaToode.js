@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 function LisaToode() {
   const [sonum, uuendaSonum] = useState("Lisa toode!"); // iga kord PEAN kasutama kui muudan HTMLi
