@@ -8,6 +8,10 @@ import NotFound from './pages/NotFound';
 import Profiil from './pages/Profiil';
 import Seaded from './pages/Seaded';
 import { useState } from 'react';
+import Tooted from './pages/Tooted';
+import Poed from './pages/Poed';
+import Tootajad from './pages/Tootajad';
+import Hinnad from './pages/Hinnad';
 
 function App() {
   const [teema, uuendaTeema] = useState(localStorage.getItem("teema") || "light");
@@ -48,12 +52,32 @@ function App() {
         <button className="nupp">Seaded</button>
       </Link>
 
+      <Link to="/tooted">
+        <button className="nupp">Tooted</button>
+      </Link>
+
+      <Link to="/poed">
+        <button className="nupp">Poed</button>
+      </Link>
+
+      <Link to="/tootajad">
+        <button className="nupp">Töötajad</button>
+      </Link>
+
+      <Link to="/hinnad">
+        <button className="nupp">Hinnad</button>
+      </Link>
+
       <Routes>
         <Route path='' element={ <Avaleht /> } />
         <Route path='ostukorv' element={ <Ostukorv /> } />
         <Route path='lisa-toode' element={ <LisaToode /> } />
         <Route path='profiil' element={ <Profiil /> } />
         <Route path='seaded' element={ <Seaded /> } />
+        <Route path='tooted' element={ <Tooted /> } />
+        <Route path='poed' element={ <Poed /> } />
+        <Route path='tootajad' element={ <Tootajad /> } />
+        <Route path='hinnad' element={ <Hinnad /> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>
 

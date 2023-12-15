@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 
 function LisaToode() {
   const [sonum, uuendaSonum] = useState("Lisa toode!"); // iga kord PEAN kasutama kui muudan HTMLi
+  const [error, uuendaError] = useState(false);
   // const sisselogitu = andmebaasistPäring();
   // let ostukorviSumma = 0;
   const inputiLuger = useRef();
@@ -18,12 +19,29 @@ function LisaToode() {
     }
   }
 
+  const kontrolli = () => {
+    if (inputiLuger.current.value === "") {
+      uuendaSonum("Kohustuslik väli ei ole täidetud.");
+      uuendaError(true);
+      return;
+    }
+
+    if (inputiLuger.current.value.includes("!")) {
+      uuendaSonum("Hüüumärgiga tooteid ei saa lisada.");
+      uuendaError(true);
+      return;
+    }
+
+    uuendaError(false);
+    uuendaSonum("");
+  }
+
   return (
     <div>
       <div>{sonum}</div>
       <label>Uue toote nimi</label> <br />
-      <input ref={inputiLuger} type="text" /> <br />
-      <button onClick={lisa}>Sisesta</button> <br />
+      <input onChange={kontrolli} ref={inputiLuger} type="text" /> <br />
+      <button disabled={error} onClick={lisa}>Sisesta</button> <br />
     </div>
   )
 }

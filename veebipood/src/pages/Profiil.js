@@ -26,6 +26,11 @@ function Profiil() {
 
   const salvestaAadress = () => {
     //if (aadressRef.current.value.charAt(0) === aadressRef.current.value.charAt(0).toLowerCase()) {
+    if (aadressRef.current.value === "") {
+      toast.error("Peab olema sisestatud!");
+      return;
+    }
+    
     if (aadressRef.current.value[0] === aadressRef.current.value[0].toLowerCase()) {
       toast.error("Peab algama suure algustähega!");
       return;
