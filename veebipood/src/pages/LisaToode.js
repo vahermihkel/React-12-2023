@@ -1,4 +1,8 @@
 import { useRef, useState } from 'react'
+import tootedFailist from "../data/tooted.json"
+
+// kui impordin: ./ või ../ tegemist on meie failiga "src" kaustast
+// kui impordin ja ei ole ./ või ../, siis on node_modules seest
 
 function LisaToode() {
   const [sonum, uuendaSonum] = useState("Lisa toode!"); // iga kord PEAN kasutama kui muudan HTMLi
@@ -16,6 +20,8 @@ function LisaToode() {
       uuendaSonum("Tühja nimetusega ei saa lisada!");
     } else {      // document.getElementById("nimi").value
       uuendaSonum("Toode lisatud: " + inputiLuger.current.value);
+      tootedFailist.push(inputiLuger.current.value);
+      inputiLuger.current.value = "";
     }
   }
 

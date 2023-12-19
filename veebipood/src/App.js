@@ -12,6 +12,12 @@ import Tooted from './pages/Tooted';
 import Poed from './pages/Poed';
 import Tootajad from './pages/Tootajad';
 import Hinnad from './pages/Hinnad';
+import HaldaPoed from './pages/HaldaPoed';
+import HaldaTootajad from './pages/HaldaTootajad';
+import HaldaTooted from './pages/HaldaTooted';
+import YksPood from './pages/YksPood';
+import YksToode from './pages/YksToode';
+import YksTootaja from './pages/YksTootaja';
 
 function App() {
   const [teema, uuendaTeema] = useState(localStorage.getItem("teema") || "light");
@@ -68,6 +74,18 @@ function App() {
         <button className="nupp">Hinnad</button>
       </Link>
 
+      <Link to="/halda-poed">
+        <button className="nupp">Halda poode</button>
+      </Link>
+
+      <Link to="/halda-tootajad">
+        <button className="nupp">Halda töötajaid</button>
+      </Link>
+
+      <Link to="/halda-tooted">
+        <button className="nupp">Halda tooteid</button>
+      </Link>
+
       <Routes>
         <Route path='' element={ <Avaleht /> } />
         <Route path='ostukorv' element={ <Ostukorv /> } />
@@ -78,6 +96,12 @@ function App() {
         <Route path='poed' element={ <Poed /> } />
         <Route path='tootajad' element={ <Tootajad /> } />
         <Route path='hinnad' element={ <Hinnad /> } />
+        <Route path='halda-poed' element={ <HaldaPoed /> } />
+        <Route path='halda-tootajad' element={ <HaldaTootajad /> } />
+        <Route path='halda-tooted' element={ <HaldaTooted /> } />
+        <Route path='pood/:nimi' element={ <YksPood /> } />
+        <Route path='toode/:index' element={ <YksToode /> } />
+        <Route path='tootaja' element={ <YksTootaja /> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>
 
@@ -87,5 +111,4 @@ function App() {
 
 export default App;
 
-// T 12.12 kell 10.00-13.30    11.00-11.05   12.20-12.45
-// K 13.12 kell 13.00-16.15
+
