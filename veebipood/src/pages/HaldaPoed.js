@@ -10,8 +10,8 @@ function HaldaPoed() {
   const aadressRef = useRef();
 
   const kustuta = (index) => {
-    poedFailist.splice(index,1);
-    uuendaPoed(poedFailist.slice());
+    poedFailist.splice(index,1); // siin jääb failist üks vähemaks
+    uuendaPoed(poedFailist.slice()); // siin teeme failist koopia ja paneme väärtused state-i
   }
 
   const lisa = () => {

@@ -1,1 +1,9 @@
-["Nobe", "Tesla", "BMW", "Saab", "Ford", "Opel", "Audi"]
+[
+  {"nimi": "Nobe", "hind": 25000, "aktiivne": false, "pilt": "https://upload.wikimedia.org/wikipedia/en/9/99/Nobe_GT100.jpg"},
+  {"nimi": "Tesla", "hind": 85000, "aktiivne": false, "pilt": "https://service.tesla.com/docs/Public/diy/images/GUID-5543BA62-932F-46C5-B1EF-44707D4726B2-online-en-US.png"},
+  {"nimi": "BMW", "hind": 45000, "aktiivne": true, "pilt": "https://cdni.autocarindia.com/Utils/ImageResizer.ashx?n=https://cms.haymarketindia.net/model/uploads/modelimages/BMW-X5-280720231245.jpg"},
+  {"nimi": "Nissan", "hind": 35000, "aktiivne": true, "pilt": "https://cars.usnews.com/static/images/Auto/izmo/i159615630/2023_nissan_sentra_angularfront.jpg"},
+  {"nimi": "Toyota", "hind": 40000, "aktiivne": true, "pilt": "https://imgd.aeplcdn.com/1920x1080/n/cw/ec/110233/camry-exterior-right-front-three-quarter-3.jpeg"},
+  {"nimi": "Bentley", "hind": 105000, "aktiivne": true, "pilt": "https://tallinn.bentleymotors.com/picserver1/userdata/1/31595/3FAdVwEMPE/flying%20spur_edition_12%20600x300.jpg"},
+  {"nimi": "NIO", "hind": 30000, "aktiivne": false, "pilt": "https://www.nio.com/cdn-static/luban/nextjs/images/44fb68805d2900f98544bd00937d735c/home/vehicle-slider-et5-touring-desktop.png"}
+]

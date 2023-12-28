@@ -18,8 +18,19 @@ function Hinnad() {
     uuendaHinnad(vastus);
   }
 
+  const hinnadKokku = () => {
+    let summa = 0;
+    // summa = summa + 55;
+    // summa = summa + 12;
+    // summa = summa + 54;
+    hinnad.forEach(hind => summa = summa + hind);
+    return summa;
+  }
+
+
   return (
     <div>
+      <div>Hindade kogusumma: {hinnadKokku()}</div>
       <button onClick={suurus}>Suuruse järjekorda</button>
       <button onClick={suurusTagurpidi}>Suurus tagurpidi</button>
       <button onClick={filtreeri}>Jäta alles suuremad kui 50</button>

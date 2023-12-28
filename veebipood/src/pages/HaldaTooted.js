@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import tootedFailist from "../data/tooted.json"
-
-// Saab tooteid kustutada ja muutma minna
+import { Link } from 'react-router-dom';
 
 function HaldaTooted() {
   const [tooted, uuendaTooted] = useState(tootedFailist);
 
-  // tehke valmis kustutamise funktsioon
   const kustuta = (index) => {
     tootedFailist.splice(index,1);
     uuendaTooted(tootedFailist.slice());
@@ -15,9 +13,15 @@ function HaldaTooted() {
   return (
     <div>
        {tooted.map((toode, index) => 
-        <div key={index}>
-          {toode}
+        <div className={toode.aktiivne ? "aktiivne" : "mitteaktiivne"} key={index}>
+          <img className='pilt' src={toode.pilt} alt="" />
+          <div>{toode.nimi}</div>
+          <div>{toode.hind} €</div>
+          <div>{toode.pilt} €</div>
           <button onClick={() => kustuta(index)}>Kustuta</button>
+          <Link to={"/muuda/" + index}>
+            <button>Muuda</button>
+          </Link>
         </div>
       )}
     </div>

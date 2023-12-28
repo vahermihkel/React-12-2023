@@ -10,6 +10,9 @@ function LisaToode() {
   // const sisselogitu = andmebaasistPäring();
   // let ostukorviSumma = 0;
   const inputiLuger = useRef();
+  const hindRef = useRef();
+  const aktiivneRef = useRef();
+  const piltRef = useRef();
 
   // function lisa() {
   //   uuendaSonum("Toode lisatud!");
@@ -20,8 +23,17 @@ function LisaToode() {
       uuendaSonum("Tühja nimetusega ei saa lisada!");
     } else {      // document.getElementById("nimi").value
       uuendaSonum("Toode lisatud: " + inputiLuger.current.value);
-      tootedFailist.push(inputiLuger.current.value);
+      const uusToode = {
+        "nimi": inputiLuger.current.value, 
+        "hind": Number(hindRef.current.value), 
+        "aktiivne": aktiivneRef.current.checked, 
+        "pilt": piltRef.current.value
+      }
+      tootedFailist.push(uusToode);
       inputiLuger.current.value = "";
+      hindRef.current.value = "";
+      piltRef.current.value = "";
+      aktiivneRef.current.value = false;
     }
   }
 
@@ -47,6 +59,12 @@ function LisaToode() {
       <div>{sonum}</div>
       <label>Uue toote nimi</label> <br />
       <input onChange={kontrolli} ref={inputiLuger} type="text" /> <br />
+      <label>Uue toote hind</label> <br />
+      <input ref={hindRef} type="number" /> <br />
+      <label>Uue toote pilt</label> <br />
+      <input ref={piltRef} type="text" /> <br />
+      <label>Uue toote aktiivsus</label> <br />
+      <input ref={aktiivneRef} type="checkbox" /> <br />
       <button disabled={error} onClick={lisa}>Sisesta</button> <br />
     </div>
   )

@@ -18,6 +18,7 @@ import HaldaTooted from './pages/HaldaTooted';
 import YksPood from './pages/YksPood';
 import YksToode from './pages/YksToode';
 import YksTootaja from './pages/YksTootaja';
+import MuudaToode from './pages/MuudaToode';
 
 function App() {
   const [teema, uuendaTeema] = useState(localStorage.getItem("teema") || "light");
@@ -102,6 +103,7 @@ function App() {
         <Route path='pood/:nimi' element={ <YksPood /> } />
         <Route path='toode/:index' element={ <YksToode /> } />
         <Route path='tootaja' element={ <YksTootaja /> } />
+        <Route path='muuda/:jrknr' element={ <MuudaToode /> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>
 
@@ -110,5 +112,8 @@ function App() {
 }
 
 export default App;
+
+// K 27.12 kell 09.00-12.15
+// R 29.12 kell 12.00-15.15
 
 

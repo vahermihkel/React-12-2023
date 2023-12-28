@@ -36,11 +36,27 @@
 }
 
 .hele {
-  background-color: antiquewhite;
+  background-color: rgb(255, 255, 255);
   text-align: center;
   min-height: 100vh;
 }
 
 .kuldne {
   color: goldenrod;
+}
+
+.pilt-mitteaktiivne {
+  filter: grayscale(100%);
+  width: 150px;
+  opacity: 0.3;
+}
+
+.aktiivne {
+  border: 1px solid green;
+  background-color: rgb(237, 240, 237);
+}
+
+.mitteaktiivne {
+  border: 1px solid red;
+  background-color: rgb(237, 232, 232);
 }

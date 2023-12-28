@@ -29,11 +29,12 @@ function YksToode() {
 
   return (
     <div>
+      {leitud.aktiivne === false && <i>Toode on mitteaktiivne</i>}
       <div>Toote järjekorranumber: {index}</div>
-      <div>Toote nimi: {leitud}</div>
-      <div>Toote hind: </div>
-      <div>Toote aktiivsus: </div>
-      <img src="" alt="" />
+      <div>Toote nimi: {leitud.nimi}</div>
+      <div>Toote hind: {leitud.hind}</div>
+      {/* <div>Toote aktiivsus: {leitud.aktiivne}</div> */}
+      <img src={leitud.pilt} alt="" />
     </div>
   )
 }
