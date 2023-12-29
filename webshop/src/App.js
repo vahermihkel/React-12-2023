@@ -8,7 +8,7 @@ import MaintainCategories from './pages/admin/MaintainCategories';
 import MaintainShops from './pages/admin/MaintainShops';
 import HomePage from './pages/global/HomePage';
 import Cart from './pages/global/Cart';
-import ContactUs from './pages/global/ContactUs';
+import { ContactUs } from './pages/global/ContactUs';
 import Shops from './pages/global/Shops';
 import SingleProduct from './pages/global/SingleProduct';
 import NotFound from './pages/global/NotFound';
@@ -76,7 +76,7 @@ export default App;
 
 // 7. 28.12 kell 09.00-12.15
 // 8. 29.12 kell 13.00-16.15
-// 9. 03.01 kell 12.00-15.15
+// 9. 03.01 kell 12.00-15.15 andmebaase
 //10. 05.01 kell 12.00-15.15
 
 // KOKKU: 16 kohtumist

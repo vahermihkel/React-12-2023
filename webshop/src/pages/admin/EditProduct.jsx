@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import productsFromFile from "../../data/products.json"
 
@@ -14,6 +14,14 @@ const EditProduct = () => {
   const navigate = useNavigate();
 
   const updateProduct = () => {
+    if (titleRef.current.value[0].toLowerCase() === titleRef.current.value[0]) {
+      return;
+    }
+
+    if (priceRef.current.value === "") {
+      return;
+    }
+    
     const index = productsFromFile.findIndex(product => product.id === Number(id));
     productsFromFile[index] = {
       "id": Number(idRef.current.value),
@@ -27,14 +35,30 @@ const EditProduct = () => {
     navigate("/admin/maintain");
   }
 
+  const [idUnique, setIdUnique] = useState(true);
+
+  const checkIdUniqueness = () => {
+    if (idRef.current.value === id) {
+      setIdUnique(true);
+      return;
+    }
+    const index = productsFromFile.findIndex(element => element.id === Number(idRef.current.value));
+    if (index === -1) {
+      setIdUnique(true);
+    } else {
+      setIdUnique(false);
+    }
+  }
+
   if (found === undefined) {
     return <div>Toodet ei leitud</div>
   }
 
   return (
     <div>
+      {idUnique === false && <div>Sisestatud ID pole unikaalne!</div>}
       <label>Id</label> <br />
-      <input type="number" ref={idRef} defaultValue={found.id} /> <br />
+      <input type="number" onChange={checkIdUniqueness} ref={idRef} defaultValue={found.id} /> <br />
       <label>Title</label> <br />
       <input type="text" ref={titleRef} defaultValue={found.title} /> <br />
       <label>Price</label> <br />
@@ -45,7 +69,7 @@ const EditProduct = () => {
       <input type="text" ref={categoryRef} defaultValue={found.category} /> <br />
       <label>Image</label> <br />
       <input type="text" ref={imageRef} defaultValue={found.image} /> <br />
-      <button onClick={updateProduct}>Muuda</button>
+      <button disabled={idUnique === false} onClick={updateProduct}>Muuda</button>
     </div>
   )
 }
