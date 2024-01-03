@@ -14,6 +14,8 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const Map = (props) => { 
 
+  // useEffect
+
   return (
   <div>
 
@@ -23,6 +25,7 @@ const Map = (props) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      {/* .map(<Marker></Marker>) */}
       <Marker position={[59.4227, 24.7954]}>
         <Popup>
           Ülemiste keskus. <br /> Avatud 9-20

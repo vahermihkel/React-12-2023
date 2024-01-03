@@ -76,22 +76,30 @@ export default App;
 
 // 7. 28.12 kell 09.00-12.15
 // 8. 29.12 kell 13.00-16.15
-// 9. 03.01 kell 12.00-15.15 andmebaase
-//10. 05.01 kell 12.00-15.15
+// 9. 03.01 kell 12.00-15.15 localStorage-sse Array, andmebaase --> KOJU: terve hunniku LS seotud ülesandeid
+//10. 05.01 kell 09.00-12.15 objekt ostukorvis, ostukorvi kujundust, makse
+//11. 10.01 kell 12.00-15.15 CSS moodulid, propsid ehk alamkomponendid, . KOJU --> proovitöö, mis on päriselt olnud
+//12. 12.01 kell 12.00-15.15 useContext ehk globaalne state
+//13. 17.01 kell 12.00-15.15 
+//14. 19.01 kell 12.00-15.15
+//15. 24.01 kell 12.00-15.15 --> Kodutöö: lõpuprojekti tegemine
+//16a. 31.01 kell 12.00-13.30 --> pooliku lõpuprojekti näitamine + koos vigade lahendamine
+//16b. 07.02 kell 12.00-13.30 --> lõpliku lõpuprojekti näitamine
 
 // KOKKU: 16 kohtumist
 
+
 // KODUS:
-// MaintainProducts --> toote kustutamine (refreshiga tuleb tagasi)
-// AddProduct --> toote lisamine (refreshiga kustub) (pigem EditProduct järgi)
-// HomePage --> sorteerimine A-Z, Z-A, hind kasvav, hind kahanev, reiting kasvav, kahanev
-// SingleProduct --> ühe toote vaatamine (pigem EditProduct järgi)
+// +MaintainProducts --> toote kustutamine (refreshiga tuleb tagasi)
+// +AddProduct --> toote lisamine (refreshiga kustub) (pigem EditProduct järgi)
+// +HomePage --> sorteerimine A-Z, Z-A, hind kasvav, hind kahanev, reiting kasvav, kahanev
+// +SingleProduct --> ühe toote vaatamine (pigem EditProduct järgi)
 // Ostukorvi tegemine --> saab HomePage lehel cart.json faili juurde lisada
 //                    --> saab Cart lehel cart.json failist kõik kätte
 // Cart --> tühjendamine, ühe kustutamine, ostukorvi kogusumma, dünaamika (kui on tühi, siis...)
-// Lisada 3-4s keel
-// Panna Firebase-i üles
-// NotFound leht ilusamaks? Mingi pilt? Suunamine avalehele nupu kaudu?
-// Kõik tõlked lisada
-// Toastify --> pärast toote lisamist, pärast toote kustutamist, ostukorvi lisades
-// HomePage --> kategooriate järgi filtreerimine
+// +Lisada 3-4s keel
+// +Panna Firebase-i üles
+// +NotFound leht ilusamaks? Mingi pilt? Suunamine avalehele nupu kaudu?
+// +Kõik tõlked lisada
+// +Toastify --> pärast toote lisamist, pärast toote kustutamist, ostukorvi lisades
+// +HomePage --> kategooriate järgi filtreerimine

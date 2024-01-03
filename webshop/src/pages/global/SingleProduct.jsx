@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import productsFromFile from '../../data/products.json'
+// import productsFromFile from '../../data/products.json'
  
 const SingleProduct = () => {
   const { id } = useParams();
-  const product = productsFromFile.find(product => product.id === Number(id));
+  const [dbProducts, setDbProducts] = useState([]);
+  const product = dbProducts.find(product => product.id === Number(id));
  
-  if (product === undefined) {
+  useEffect(() => {
+    fetch(process.env.REACT_APP_PRODUCTS_DB_URL)
+      .then(res => res.json())
+      .then(json => {
+        setDbProducts(json);
+      })
+  }, []);
+ 
+  if ( product === undefined ) {
     return <div>Toodet ei leitud</div>
   }
-
+ 
   return (
     <div>
       <img src={product.image} alt='' />

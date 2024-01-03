@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import productsFromFile from "../../data/products.json"
+// import productsFromFile from "../../data/products.json"
 
 const EditProduct = () => {
   const { id } = useParams();    // {id: 3, title: ""}   3  === "3"
-  const found = productsFromFile.find(product => product.id === Number(id));
+  const [dbProducts, setDbProducts] = useState([]);
+  const found = dbProducts.find(product => product.id === Number(id));
   const idRef = useRef();
   const titleRef = useRef();
   const priceRef = useRef();
@@ -12,6 +13,20 @@ const EditProduct = () => {
   const categoryRef = useRef();
   const imageRef = useRef();
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {    
+    fetch(process.env.REACT_APP_PRODUCTS_DB_URL)
+      .then(res => res.json())
+      .then(json => {
+        setDbProducts(json); 
+      })
+    fetch(process.env.REACT_APP_CATEGORIES_DB_URL)
+      .then(res => res.json())
+      .then(json => {
+        setCategories(json); 
+      })
+  }, []);
 
   const updateProduct = () => {
     if (titleRef.current.value[0].toLowerCase() === titleRef.current.value[0]) {
@@ -22,8 +37,8 @@ const EditProduct = () => {
       return;
     }
     
-    const index = productsFromFile.findIndex(product => product.id === Number(id));
-    productsFromFile[index] = {
+    const index = dbProducts.findIndex(product => product.id === Number(id));
+    dbProducts[index] = {
       "id": Number(idRef.current.value),
       "title": titleRef.current.value,
       "price": Number(priceRef.current.value),
@@ -32,7 +47,8 @@ const EditProduct = () => {
       "image": imageRef.current.value,
       "rating": { "rate": Number(found.rating.rate), "count": Number(found.rating.count) }
     };
-    navigate("/admin/maintain");
+    fetch(process.env.REACT_APP_PRODUCTS_DB_URL, {"method": "PUT", "body": JSON.stringify(dbProducts)})
+      .then(() => navigate("/admin/maintain"));
   }
 
   const [idUnique, setIdUnique] = useState(true);
@@ -42,7 +58,7 @@ const EditProduct = () => {
       setIdUnique(true);
       return;
     }
-    const index = productsFromFile.findIndex(element => element.id === Number(idRef.current.value));
+    const index = dbProducts.findIndex(element => element.id === Number(idRef.current.value));
     if (index === -1) {
       setIdUnique(true);
     } else {
@@ -66,7 +82,10 @@ const EditProduct = () => {
       <label>Description</label> <br />
       <input type="text" ref={descriptionRef} defaultValue={found.description} /> <br />
       <label>Category</label> <br />
-      <input type="text" ref={categoryRef} defaultValue={found.category} /> <br />
+      {/* <input type="text" ref={categoryRef} defaultValue={found.category} /> <br /> */}
+      <select ref={categoryRef} defaultValue={found.category}>
+        {categories.map(category => <option key={category.name}>{category.name}</option>)}
+      </select> <br />
       <label>Image</label> <br />
       <input type="text" ref={imageRef} defaultValue={found.image} /> <br />
       <button disabled={idUnique === false} onClick={updateProduct}>Muuda</button>
