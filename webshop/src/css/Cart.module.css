@@ -1,0 +1,48 @@
+.picture {
+  width: 100px;
+  height: 100px;
+}
+
+.button {
+  width: 30px;
+  height: 30px;
+}
+
+.button:hover {
+  opacity: 70%;
+  cursor: pointer;
+}
+
+.button:active {
+  padding: 1px;
+}
+
+.product {
+ display: flex;
+ justify-content: space-between;
+ margin: 0 5%;
+ border-bottom: 1px solid lightgray;
+ padding: 10px 0;
+}
+
+.title {
+  width: 140px;
+}
+
+.price {
+  width: 70px;
+}
+
+.quantity {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid lightgray;
+  height: 40px;
+  padding: 4px;
+  border-radius: 20px;
+}
+
+.total {
+  width: 70px;
+}

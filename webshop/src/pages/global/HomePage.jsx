@@ -2,11 +2,15 @@ import React, { useEffect } from 'react'
 // import productsFromFile from '../../data/products.json'
 // import cartFromFile from '../../data/cart.json'
 import { useState } from 'react'
-import { Button, Spinner } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify';
-import '../../css/HomePage.css'
+import styles from '../../css/HomePage.module.css'
+import SortButtons from '../../components/home/SortButtons'
+import Product from '../../components/home/Product'
+import { Spinner } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
+
+// import '../../css/HomePage.css' --->
+// import MUUTUJA from '../../css/HomePage.module.css'
  
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -28,35 +32,7 @@ const HomePage = () => {
       })
   }, []);
  
-  const sortAToZ = () => {
-    products.sort((a, b) => a.title.localeCompare(b.title));
-    setProducts(products.slice());
-  }
- 
-  const sortZToA = () => {
-    products.sort((a, b) => b.title.localeCompare(a.title));
-    setProducts(products.slice());
-  }
- 
-  const sortPriceAscending = () => {
-    products.sort((a, b) => a.price - b.price);
-    setProducts(products.slice());
-  }
- 
-  const sortPriceDescending = () => {
-    products.sort((a, b) => b.price - a.price);
-    setProducts(products.slice());
-  }
- 
-  const sortRatingAscending = () => {
-    products.sort((a, b) => a.rating.rate - b.rating.rate);
-    setProducts(products.slice());
-  }
- 
-  const sortRatingDescending = () => {
-    products.sort((a, b) => b.rating.rate - a.rating.rate);
-    setProducts(products.slice());
-  }
+  
  
   // const filterMensClothing = () => {
   //   const filtered = dbProducts.filter(product => product.category === "men's clothing");
@@ -82,18 +58,12 @@ const HomePage = () => {
     const filtered = dbProducts.filter(product => product.category === categoryClicked);
     setProducts(filtered);
   }
- 
-  const addToCart = (product) => {
-    // cartFromFile.push(product);
+
+   // cartFromFile.push(product);
     // otse localStorage-sse pushida ei saa
     // localStorage-st saab võtta, mis selle võtme taga on
     // paneme võetule ühe juurde
     // localStorage-sse saab panna, võtme abil, asendades selle väärtuse mis oli varasemalt
-    const cartLS = JSON.parse(localStorage.getItem("cart")) || []; // || "" --> "[{"Nobe"}]" ------> [{"Nobe"}]
-    cartLS.push(product);
-    localStorage.setItem("cart", JSON.stringify(cartLS)); // "[{"Nobe"}, {"BMW"}]"
-    toast.success("Toode lisatud ostukorvi!");
-  }
 
   // localStorage.getItem("theme") -> "dark"
   // localStorage.getItem("keel") -> "EE"
@@ -114,27 +84,17 @@ const HomePage = () => {
           <button key={category.name} onClick={() => filterByCategory(category.name)}>{t(category.name)}</button>)
         }
       </div>
-      <div>
-        {t("sort")}:
-        <button onClick={sortAToZ}>A-Z</button>
-        <button onClick={sortZToA}>Z-A</button>
-        <button onClick={sortPriceAscending}>{t('price-ascending')}</button>
-        <button onClick={sortPriceDescending}>{t('price-descending')}</button>
-        <button onClick={sortRatingAscending}>{t('rating-ascending')}</button>
-        <button onClick={sortRatingDescending}>{t('rating-descending')}</button>
-      </div>
+      <SortButtons
+        products={products}
+        setProducts={setProducts}
+      />
       <div>{t("total-products")}: {products.length} / {dbProducts.length}</div>
-      <div className='products'>
+      <div className={styles.products}>
         {products.map(product =>
-          <div key={product.id} className='product'>
-            <img src={product.image} alt='' />
-            <div className='title'>{product.title}</div>
-            <div>{product.price} €</div>
-            <button onClick={() => addToCart(product)}>{t("add-to-cart")}</button>
-            <Button as={Link} to={'/product/' + product.id}>{t("details")}</Button>
-          </div>
+          <Product key={product.id} product={product} />
         )}
       </div>
+      <ToastContainer />
     </div>
   )
 }
