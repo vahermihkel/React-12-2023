@@ -8,10 +8,10 @@ const AdminHome = () => {
 
   return (
     <div>
-      <Button as={Link} to="/admin/maintain-shops" variant="primary">{t("maintain-shops")}</Button>{' '}
-      <Button as={Link} to="/admin/maintain-categories" variant="secondary">{t("maintain-categories")}</Button>{' '}
-      <Button as={Link} to="/admin/add" variant="success">{t("add-product")}</Button>{' '}
-      <Button as={Link} to="/admin/maintain" variant="warning">{t("maintain-products")}</Button>{' '}
+      <Button as={Link} to="/admin/maintain-shops" variant="primary">{t("admin.maintain-shops")}</Button>{' '}
+      <Button as={Link} to="/admin/maintain-categories" variant="secondary">{t("admin.maintain-categories")}</Button>{' '}
+      <Button as={Link} to="/admin/add" variant="success">{t("admin.add-product")}</Button>{' '}
+      <Button as={Link} to="/admin/maintain" variant="warning">{t("admin.maintain-products")}</Button>{' '}
     </div>
   )
 }

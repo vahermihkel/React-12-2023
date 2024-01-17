@@ -1,12 +1,16 @@
 {
-  "admin": "Admin vaade",
-  "shops": "Meie poed",
-  "contact": "Kontakteeru meiega",
-  "cart": "Ostukorvi",
-  "maintain-shops": "Halda poode",
-  "maintain-categories": "Halda kategooriaid",
-  "add-product": "Lisa toode",
-  "maintain-products": "Halda tooteid",
+  "nav": {
+    "admin": "Admin vaade",
+    "shops": "Meie poed",
+    "contact": "Kontakteeru meiega",
+    "cart": "Ostukorvi"
+  },
+  "admin": {
+    "maintain-shops": "Halda poode",
+    "maintain-categories": "Halda kategooriaid",
+    "add-product": "Lisa toode",
+    "maintain-products": "Halda tooteid"
+  },
   "delete": "Kustuta",
   "change": "Muuda",
   "add": "Lisa",

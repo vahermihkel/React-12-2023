@@ -3,6 +3,9 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import ChangeView from './ChangeView';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+ 
 let DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow,
@@ -11,38 +14,37 @@ let DefaultIcon = L.icon({
   popupAnchor: [2, -40],
 });
 L.Marker.prototype.options.icon = DefaultIcon;
-
-const Map = (props) => { 
-
-  // useEffect
-
-  return (
+ 
+const Map = (props) => {
+  const { t } = useTranslation();
+  const [shops, setShops] = useState([]);
+ 
+  useEffect(() => {
+    fetch(process.env.REACT_APP_SHOPS_DB_URL)
+      .then(res => res.json())
+      .then(json => {
+        setShops(json || []);
+      })
+  }, []);
+ 
+  return (	
   <div>
-
     <MapContainer className='map' center={props.mapCoordinaates.lngLat} zoom={props.mapCoordinaates.zoom} scrollWheelZoom={false}>
       <ChangeView center={props.mapCoordinaates.lngLat} zoom={props.mapCoordinaates.zoom} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* .map(<Marker></Marker>) */}
-      <Marker position={[59.4227, 24.7954]}>
-        <Popup>
-          Ülemiste keskus. <br /> Avatud 9-20
-        </Popup>
-      </Marker>
-      <Marker position={[59.4269, 24.7241]}>
-        <Popup>
-          Kristiine keskus. <br /> Avatud 10-21
-        </Popup>
-      </Marker>
-      <Marker position={[58.3777, 26.7303]}>
-        <Popup>
-          Tasku keskus. <br /> Avatud 10-21
-        </Popup>
-      </Marker>
-    </MapContainer>
-  </div>)
+      {shops.map(shop =>
+        <Marker position={[shop.longitude, shop.latitude]}>
+          <Popup>
+            {shop.name} <br /> {t("open")} {shop.openTime}
+          </Popup>
+        </Marker>
+      )}
+    </MapContainer>	
+  </div>
+  )	
 }
-
+ 
 export default Map; 

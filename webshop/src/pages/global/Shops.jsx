@@ -1,22 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ButtonGroup, Spinner, Button } from 'react-bootstrap';
 import Map from '../../components/Map';
-
+import { useTranslation } from 'react-i18next';
+ 
 const Shops = () => {
+	const { t } = useTranslation();
   const [coordinaates, setCoordinates] = useState({lngLat: [59.4378, 24.7574], zoom: 11});
-
-    // useEffect
-
-  return (<div>
-    <button onClick={() => setCoordinates({lngLat: [58.8297, 25.8217], zoom: 7})}>Kõik poed</button>
-    <button onClick={() => setCoordinates({lngLat: [59.4378, 24.7574], zoom: 11})}>Kõik Tallinna poed</button>
-    
-    {/* kuidas HomePage.jsx sees sai tehtud filterButtons */}
-    <button onClick={() => setCoordinates({lngLat: [59.4231, 24.7991], zoom: 13})}>Ülemiste</button>
-    <button onClick={() => setCoordinates({lngLat: [59.4277, 24.7193], zoom: 13})}>Kristiine</button>
-    <button onClick={() => setCoordinates({lngLat: [58.3777, 26.7303], zoom: 13})}>Tasku</button>
-
-    <Map mapCoordinaates={coordinaates}  />
-  </div>)
+  const [shops, setShops] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+ 
+  useEffect(() => {
+    fetch(process.env.REACT_APP_SHOPS_DB_URL)
+      .then(res => res.json())
+      .then(json => {
+        setShops(json || []);
+        setIsLoading(false);
+      })
+  }, []);
+ 
+  if (isLoading) {
+    return <Spinner />
+  }
+ 
+  return (
+    <div>
+      <Button onClick={() => setCoordinates({lngLat: [58.7286, 25.7873], zoom: 7})}>{t("all shops")}</Button>{' '}
+      <Button onClick={() => setCoordinates({lngLat: [59.4378, 24.7574], zoom: 11})}>{t("all shops in tallinn")}</Button>{' '}
+      <div>
+        <ButtonGroup>
+          {shops.map(shop =>
+            <Button key={shop.name} onClick={() => setCoordinates({lngLat: [shop.longitude, shop.latitude], zoom: 13})} size="sm" variant='secondary'>{shop.name}</Button>
+          )}
+        </ButtonGroup>
+      </div>
+ 
+      <Map mapCoordinaates={coordinaates}  />
+    </div>
+  )
 }
-
+ 
 export default Shops;

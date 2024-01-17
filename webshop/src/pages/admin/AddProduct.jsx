@@ -12,6 +12,8 @@ const AddProduct = () => {
   const imageRef = useRef();
   const [dbProducts, setDbProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [idUnique, setIdUnique] = useState(true);
+  
 
   useEffect(() => {    
     fetch(process.env.REACT_APP_PRODUCTS_DB_URL)
@@ -26,7 +28,7 @@ const AddProduct = () => {
       })
   }, []);
  
-  const updateProduct = () => {
+  const add = () => {
     if (titleRef.current.value[0].toLowerCase() === titleRef.current.value[0]) {
       return;
     }
@@ -56,8 +58,6 @@ const AddProduct = () => {
     fetch(process.env.REACT_APP_PRODUCTS_DB_URL, {"method": "PUT", "body": JSON.stringify(dbProducts)});
   }
 
-  const [idUnique, setIdUnique] = useState(true);
-
   const checkIdUniqueness = () => {
     const index = dbProducts.findIndex(element => element.id === Number(idRef.current.value));
     if (index === -1) {
@@ -85,7 +85,7 @@ const AddProduct = () => {
       </select> <br />
       <label>{t('image')}</label>
       <input type='text' ref={imageRef} /> <br />
-      <button disabled={idUnique === false} onClick={updateProduct}>{t('add')}</button>
+      <button disabled={idUnique === false} onClick={add}>{t('add')}</button>
     </div>
   )
 }

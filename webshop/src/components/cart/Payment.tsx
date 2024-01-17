@@ -1,6 +1,8 @@
 import React from 'react'
+import { PaymentProps } from '../../models/PaymentProps';
+import { PaymentResponse } from '../../models/PaymentResponse';
 
-const Payment = (props) => {
+const Payment = (props: PaymentProps) => {
 
   const pay = () => {
     const url = "https://igw-demo.every-pay.com/api/v4/payments/oneoff";
@@ -19,8 +21,8 @@ const Payment = (props) => {
     }
 
     fetch(url, {"method": "POST", "body": JSON.stringify(paymentData), "headers": paymentHeaders})
-      .then(res => res.json())
-      .then(json => window.location.href = json.payment_link)
+      .then((res: Response) => res.json())
+      .then((json: PaymentResponse) => window.location.href = json.payment_link)
   }
 
   return (
