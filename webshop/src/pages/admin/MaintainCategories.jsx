@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Spinner } from 'react-bootstrap';
 
 const MaintainCategories = () => {
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const categoryRef = useRef();
 
   useEffect(() => {
     fetch(process.env.REACT_APP_CATEGORIES_DB_URL)
       .then(res => res.json())
-      .then(json => setCategories(json || []));
+      .then(json => {
+        setCategories(json || []);
+        setLoading(false);
+      });
   }, []);
 
   const addCategory = () => {
@@ -25,6 +30,10 @@ const MaintainCategories = () => {
     fetch(process.env.REACT_APP_CATEGORIES_DB_URL, {"method": "PUT", "body": JSON.stringify(categories)})
       .then(() => setCategories(categories.slice()));
     // toast välja
+  }
+
+  if (loading === true) {
+    return <Spinner />
   }
 
   return (

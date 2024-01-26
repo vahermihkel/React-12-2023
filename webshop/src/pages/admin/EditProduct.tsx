@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Product } from '../../models/Product';
 import { Category } from '../../models/Category';
+import useFetchProducts from '../../util/useFetchProducts';
+import { Spinner } from 'react-bootstrap';
 // import productsFromFile from "../../data/products.json"
 
 const EditProduct = () => {
   const { id } = useParams();    // {id: 3, title: ""}   3  === "3"
-  const [dbProducts, setDbProducts] = useState<Product[]>([]);
+  // const [dbProducts, setDbProducts] = useState<Product[]>([]);
+  const {dbProducts, loading} = useFetchProducts();
   const found = dbProducts.find(product => product.id === Number(id));
   const idRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
@@ -19,13 +21,6 @@ const EditProduct = () => {
   const [idUnique, setIdUnique] = useState(true);
 
   useEffect(() => {    
-    const productUrl = process.env.REACT_APP_PRODUCTS_DB_URL;
-    if (productUrl === undefined) return;
-    fetch(productUrl)
-      .then(res => res.json())
-      .then(json => {
-        setDbProducts(json); 
-      })
     const categoryUrl = process.env.REACT_APP_PRODUCTS_DB_URL;
     if (categoryUrl === undefined) return;
     fetch(categoryUrl)
@@ -83,6 +78,14 @@ const EditProduct = () => {
     } else {
       setIdUnique(false);
     }
+  }
+
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (found === undefined) {
+    return <div>Toodet ei leitud</div>
   }
 
   return (

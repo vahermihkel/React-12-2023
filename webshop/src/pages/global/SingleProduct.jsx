@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import useFetchProducts from '../../util/useFetchProducts';
+import { Spinner } from 'react-bootstrap';
 // import productsFromFile from '../../data/products.json'
  
 const SingleProduct = () => {
   const { id } = useParams();
-  const [dbProducts, setDbProducts] = useState([]);
+  const {dbProducts, loading} = useFetchProducts();
   const product = dbProducts.find(product => product.id === Number(id));
- 
-  useEffect(() => {
-    fetch(process.env.REACT_APP_PRODUCTS_DB_URL)
-      .then(res => res.json())
-      .then(json => {
-        setDbProducts(json);
-      })
-  }, []);
+
+  if ( loading === true ) {
+    return <Spinner />
+  }
  
   if ( product === undefined ) {
     return <div>Toodet ei leitud</div>

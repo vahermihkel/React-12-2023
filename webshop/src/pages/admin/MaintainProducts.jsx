@@ -6,22 +6,18 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import styles from "../../css/MaintainProducts.module.css"
 import ConfirmationModal from '../../components/ConfirmationModal';
+import useFetchProducts from '../../util/useFetchProducts';
 
 const MaintainProducts = () => {
   const [products, setProducts] = useState([]);
-  const [dbProducts, setDbProducts] = useState([]);
   const { t } = useTranslation();
   const searchedRef = useRef();
   const confirmationModalRef = useRef();
+  const {dbProducts, loading} = useFetchProducts();
 
   useEffect(() => {    
-    fetch(process.env.REACT_APP_PRODUCTS_DB_URL)
-      .then(res => res.json())
-      .then(json => {
-        setProducts(json); // väljanäitamisega seotult muudan tooteid
-        setDbProducts(json); // rohkem ei tee v.a kui teen midagi andmebaasiga seotult
-      })
-  }, []);
+    setProducts(dbProducts);
+  }, [dbProducts]);
  
   const deleteProduct = (productClicked) => {
     const index = dbProducts.findIndex(element => element.id === Number(productClicked.id));
@@ -39,7 +35,7 @@ const MaintainProducts = () => {
     setProducts(result);
   }
 
-  if (dbProducts.length === 0) {
+  if (loading) {
     return <Spinner />
   }
  

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 // import productsFromFile from '../../data/products.json'
 import { useTranslation } from 'react-i18next';
+import useFetchProducts from '../../util/useFetchProducts';
  
 const AddProduct = () => {
   const { t } = useTranslation();
@@ -10,17 +11,13 @@ const AddProduct = () => {
   const descriptionRef = useRef();
   const categoryRef = useRef();
   const imageRef = useRef();
-  const [dbProducts, setDbProducts] = useState([]);
+  // const [dbProducts, setDbProducts] = useState([]);
+  const {dbProducts} = useFetchProducts();
   const [categories, setCategories] = useState([]);
   const [idUnique, setIdUnique] = useState(true);
   
 
   useEffect(() => {    
-    fetch(process.env.REACT_APP_PRODUCTS_DB_URL)
-      .then(res => res.json())
-      .then(json => {
-        setDbProducts(json); 
-      })
     fetch(process.env.REACT_APP_CATEGORIES_DB_URL)
       .then(res => res.json())
       .then(json => {

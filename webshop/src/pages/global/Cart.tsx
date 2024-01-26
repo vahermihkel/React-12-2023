@@ -11,6 +11,8 @@ import { Spinner } from "react-bootstrap";
 import { CartProduct } from "../../models/CartProduct";
 import { Product } from "../../models/Product";
 import { LocalStorageProduct } from "../../models/LocalStorageProduct";
+import { useDispatch } from "react-redux";
+import { empty, add, remove } from '../../store/cartSumSlice';
 
 const Cart = () => {
   const [cart, setCart] = useState<CartProduct[]>(
@@ -22,6 +24,8 @@ const Cart = () => {
   // const localStorageKey = process.env.REACT_APP_LOCALTORAGE_KEY;
   const cartLS: LocalStorageProduct[] = useMemo(() => JSON.parse(localStorage.getItem("cart") || "[]"), []);
   // const [number, setNumber] = useState(7);
+  const dispatch = useDispatch()
+
 
   // const teeKulukasFunktsioon = () => {
   //   for (let index = 0; index < 9999999; index++) {}
@@ -52,6 +56,7 @@ const Cart = () => {
   }, [getCartWithProducts]);
 
   const decreaseQuantity = (index: number) => {
+    dispatch(remove(cart[index].product.price));
     cart[index].quantity--;
     cartLS[index].quantity--;
     if (cart[index].quantity === 0) {
@@ -64,6 +69,7 @@ const Cart = () => {
   };
 
   const increaseQuantity = (index: number) => {
+    dispatch(add(cart[index].product.price));
     cart[index].quantity++;
     cartLS[index].quantity++;
     setCart(cart.slice());
@@ -72,6 +78,7 @@ const Cart = () => {
   };
 
   const removeFromCart = (index: number) => {
+    dispatch(remove(cart[index].product.price * cart[index].quantity));
     cart.splice(index, 1);
     cartLS.splice(index, 1)
     setCart(cart.slice());

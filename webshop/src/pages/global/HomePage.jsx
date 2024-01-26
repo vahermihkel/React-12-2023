@@ -8,23 +8,23 @@ import SortButtons from '../../components/home/SortButtons'
 import Product from '../../components/home/Product'
 import { Spinner } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
+import useFetchProducts from '../../util/useFetchProducts'
+import FilterButtons from '../../components/home/FilterButtons'
 
 // import '../../css/HomePage.css' --->
 // import MUUTUJA from '../../css/HomePage.module.css'
  
 const HomePage = () => {
   const [products, setProducts] = useState([]);
-  const [dbProducts, setDbProducts] = useState([]);
+  const {dbProducts, loading} = useFetchProducts();
   const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
 
   useEffect(() => {    
-    fetch(process.env.REACT_APP_PRODUCTS_DB_URL)
-      .then(res => res.json())
-      .then(json => {
-        setProducts(json); // väljanäitamisega seotult muudan tooteid
-        setDbProducts(json); // rohkem ei tee v.a kui teen midagi andmebaasiga seotult
-      })
+    setProducts(dbProducts.slice());
+  }, [dbProducts]);
+
+  useEffect(() => {
     fetch(process.env.REACT_APP_CATEGORIES_DB_URL)
       .then(res => res.json())
       .then(json => {
@@ -32,58 +32,18 @@ const HomePage = () => {
       })
   }, []);
  
-  
- 
-  // const filterMensClothing = () => {
-  //   const filtered = dbProducts.filter(product => product.category === "men's clothing");
-  //   setProducts(filtered);
-  // }
- 
-  // const filterWomensClothing = () => {
-  //   const filtered = dbProducts.filter(product => product.category === "women's clothing");
-  //   setProducts(filtered);
-  // }
- 
-  // const filterElectronics = () => {
-  //   const filtered = dbProducts.filter(product => product.category === "electronics");
-  //   setProducts(filtered);
-  // }
- 
-  // const filterJewelery = () => {
-  //   const filtered = dbProducts.filter(product => product.category === "jewelery");
-  //   setProducts(filtered);
-  // }
 
-  const filterByCategory = (categoryClicked) => {
-    const filtered = dbProducts.filter(product => product.category === categoryClicked);
-    setProducts(filtered);
-  }
-
-   // cartFromFile.push(product);
-    // otse localStorage-sse pushida ei saa
-    // localStorage-st saab võtta, mis selle võtme taga on
-    // paneme võetule ühe juurde
-    // localStorage-sse saab panna, võtme abil, asendades selle väärtuse mis oli varasemalt
-
-  // localStorage.getItem("theme") -> "dark"
-  // localStorage.getItem("keel") -> "EE"
-
-  if (dbProducts.length === 0) {
+  if (loading) {
     return <Spinner />
   }
  
   return (
     <div>
-      <div>
-        {t("filter")}:
-        {/* <button onClick={filterMensClothing}>{t("mens-clothing")}</button>
-        <button onClick={filterWomensClothing}>{t("womens-clothing")}</button>
-        <button onClick={filterJewelery}>{t("jewelery")}</button>
-        <button onClick={filterElectronics}>{t("electronics")}</button> */}
-        {categories.map(category => 
-          <button key={category.name} onClick={() => filterByCategory(category.name)}>{t(category.name)}</button>)
-        }
-      </div>
+      <FilterButtons 
+        categories={categories}
+        setProducts={setProducts}
+        dbProducts={dbProducts}
+      />
       <SortButtons
         products={products}
         setProducts={setProducts}

@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React from 'react'
 import { useTranslation } from 'react-i18next'
                 //= (props)
@@ -38,12 +39,12 @@ const SortButtons = ({products, setProducts}) => {
   return (
     <div>
       {t("sort")}:
-      <button onClick={sortAToZ}>A-Z</button>
-      <button onClick={sortZToA}>Z-A</button>
-      <button onClick={sortPriceAscending}>{t('price-ascending')}</button>
-      <button onClick={sortPriceDescending}>{t('price-descending')}</button>
-      <button onClick={sortRatingAscending}>{t('rating-ascending')}</button>
-      <button onClick={sortRatingDescending}>{t('rating-descending')}</button>
+      <Button onClick={sortAToZ}>A-Z</Button>
+      <Button onClick={sortZToA}>Z-A</Button>
+      <Button onClick={sortPriceAscending}>{t('price-ascending')}</Button>
+      <Button onClick={sortPriceDescending}>{t('price-descending')}</Button>
+      <Button onClick={sortRatingAscending}>{t('rating-ascending')}</Button>
+      <Button onClick={sortRatingDescending}>{t('rating-descending')}</Button>
     </div>
   )
 }
